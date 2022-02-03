@@ -5,7 +5,6 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const User = require('./models/User');
 const hbs = exphbs.create({});
 
 // Tells node we're using handlebars as our template engine
