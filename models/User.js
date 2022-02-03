@@ -10,7 +10,7 @@ User.init(
             defaultValue: UUIDV4,
             primaryKey: true
         },
-        name: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -32,7 +32,7 @@ User.init(
     },
     {
         sequelize,
-        timestamp: false,
+        timestamps: false,
         freezeTableName: true,
         modelName: 'user'
     }
