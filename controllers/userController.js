@@ -22,8 +22,13 @@ module.exports = {
     },
     getAllUsers: async (req, res) => {
         try {
-            const users = await User.findAll();
-            res.json(users);
+            const usersData = await User.findAll();
+            // Needed to remove additional content that comes from sequelize
+            const users = usersData.map(user => user.get({plain: true}));
+            res.render('allUsers', {
+                users,
+                favoriteFood: 'Ice cream sandwich'
+            });
         } catch (e) {
             res.json(e);
         }
