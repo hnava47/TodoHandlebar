@@ -80,5 +80,12 @@ module.exports = {
         } catch (e) {
             res.json(e);
         }
+    },
+    loginView: (req, res) => {
+        if (req.session.loggedIn) {
+            return res.redirect('/todos');
+        }
+
+        res.render('login');
     }
 };
