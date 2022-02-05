@@ -5,7 +5,7 @@ const $login = document.querySelector('#login');
 $login.addEventListener('click', async function(event) {
     event.preventDefault();
     try {
-        const response = await fetch('/api/users/login' {
+        const response = await fetch('/api/users/login', {
             method: 'POST',
             body: JSON.stringify({
                 email: $email.value,
