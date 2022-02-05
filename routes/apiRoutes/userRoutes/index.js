@@ -1,17 +1,18 @@
 const router = require('express').Router();
 const {
     createUser,
-    getAllUsers,
     getUserById,
-    login
+    login,
+    signUpHandler
 } = require('../../../controllers/userController');
 
 router.route('/')
-    .get(getAllUsers)
     .post(createUser);
 
 router.route('/:userId')
     .get(getUserById);
+
+router.post('/signup', signUpHandler);
 
 router.post('/login', login);
 

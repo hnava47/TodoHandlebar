@@ -22,7 +22,7 @@ Todo.init(
             type: DataTypes.UUID,
             references: {
                 model: 'user',
-                key: id
+                key: 'id'
             }
         }
     },
