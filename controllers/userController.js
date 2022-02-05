@@ -36,7 +36,8 @@ module.exports = {
             res.render('allUsers', {
                 users,
                 favoriteFood: 'Ice cream sandwich',
-                visitCount: req.session.visitCount
+                visitCount: req.session.visitCount,
+                loggedInUser: req.session.user || null
             });
         } catch (e) {
             res.json(e);
@@ -64,15 +65,15 @@ module.exports = {
     },
     login: async (req, res) => {
         try {
-            const userFound = await User.findOne({
+            const userData = await User.findOne({
                 where: {
                     email: req.body.email
                 }
             });
-
+            const userFound = userData.get({plain: true});
             if (userFound.password === req.body.password) {
                 req.session.save(() => {
-                    req.session.user = userFound.get({plain: true});
+                    req.session.user = userFound;
                     res.json({success: true});
                 });
             }
