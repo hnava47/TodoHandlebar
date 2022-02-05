@@ -87,5 +87,12 @@ module.exports = {
         }
 
         res.render('login');
+    },
+    signUpView: (req, res) => {
+        if (req.session.loggedIn) {
+            return res.redirect('/todos');
+        }
+
+        res.render('signUp');
     }
 };
