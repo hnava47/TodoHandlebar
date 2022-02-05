@@ -21,24 +21,42 @@ module.exports = {
         }
     },
     getAllUsers: async (req, res) => {
+        req.session.save(() => {
+            if (req.session.visitCount) {
+                req.session.visitCount++;
+            } else {
+                req.session.visitCount = 1;
+            }
+        });
+
         try {
             const usersData = await User.findAll();
             // Needed to remove additional content that comes from sequelize
             const users = usersData.map(user => user.get({plain: true}));
             res.render('allUsers', {
                 users,
-                favoriteFood: 'Ice cream sandwich'
+                favoriteFood: 'Ice cream sandwich',
+                visitCount: req.session.visitCount
             });
         } catch (e) {
             res.json(e);
         }
     },
     getUserById: async (req, res) => {
+        req.session.save(() => {
+            if (req.session.visitCount) {
+                req.session.visitCount++;
+            } else {
+                req.session.visitCount = 1;
+            }
+        });
+
         try {
             const userData = await User.findByPk(req.params.userId);
             const user = userData.get({plain: true});
             res.render('singleUser', {
-                user
+                user,
+                visitCount: req.session.visitCount
             });
         } catch (e) {
             res.json(e);
