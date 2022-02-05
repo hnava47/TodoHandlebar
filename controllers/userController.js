@@ -61,5 +61,23 @@ module.exports = {
         } catch (e) {
             res.json(e);
         }
+    },
+    login: async (req, res) => {
+        try {
+            const userFound = await User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            });
+
+            if (userFound.password === req.body.password) {
+                req.session.save(() => {
+                    req.session.user = userFound.get({plain: true});
+                    res.json({success: true});
+                });
+            }
+        } catch (e) {
+            res.json(e);
+        }
     }
 };
