@@ -7,9 +7,9 @@ $(document).ready(function() {
     $signUpBtn.on('click', async function(event) {
         event.preventDefault();
         await $.post('/api/users/signup', {
-            email: $emailField.val(),
-            username: $usernameField.val(),
-            password: $passwordField.val()
+            email: $emailField.val().trim(),
+            username: $usernameField.val().trim(),
+            password: $passwordField.val().trim()
         });
 
         window.location.href = '/todos';

@@ -3,7 +3,8 @@ const {
     createUser,
     getUserById,
     login,
-    signUpHandler
+    signUpHandler,
+    logout
 } = require('../../../controllers/userController');
 
 router.route('/')
@@ -15,5 +16,7 @@ router.route('/:userId')
 router.post('/signup', signUpHandler);
 
 router.post('/login', login);
+
+router.post('/logout', logout);
 
 module.exports = router;

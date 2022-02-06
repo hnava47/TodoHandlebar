@@ -53,6 +53,7 @@ module.exports = {
             const userFound = userData.get({plain: true});
             if (userFound.password === req.body.password) {
                 req.session.save(() => {
+                    req.session.loggedIn = true;
                     req.session.user = userFound;
                     res.json({success: true});
                 });
@@ -95,5 +96,10 @@ module.exports = {
         }
 
         res.render('signUp');
+    },
+    logout: (req, res) => {
+        req.session.destroy(() => {
+            res.send({status: true});
+        });
     }
 };
