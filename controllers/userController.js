@@ -71,9 +71,11 @@ module.exports = {
                 password
             });
 
+            const user = createdUser.get({plain: true});
+
             req.session.save(() => {
                 req.session.loggedIn = true;
-                req.session.user = createdUser;
+                req.session.user = user;
                 res.redirect('/todos');
             });
         } catch (e) {
